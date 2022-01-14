@@ -2,7 +2,7 @@
 // Ссылка на видео
 $url = "https://www.youtube.com/watch?v=rTEbIruSZwM";
 
-$apiKey = "AIzaSyBMdNCjTPUlpQ1qzs_Cfo3B2AQAYSnvlIo";
+$apiKey = "AIzaSyBDnBRH9qBWS8YOv7YVzFxcp_aInoj8_A4";
 
 $videoId = getVideoId($url);
 
