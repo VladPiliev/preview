@@ -13,7 +13,7 @@ $title = $info["items"][0]["snippet"]["title"];
 $image = $info["items"][0]["snippet"]["thumbnails"]["medium"]["url"];
 $channelTitle = $info["items"][0]["snippet"]["channelTitle"];
 $channelUrl = "https://www.youtube.com/channel/" . $info["items"][0]["snippet"]["channelId"];
-	
+$iframeUrl = "https://www.youtube.com/embed/{$videoId}?autoplay=1";
 	/**
 	 * Парсинг ссылки, получение id видео.
 	 * 
@@ -26,43 +26,44 @@ $channelUrl = "https://www.youtube.com/channel/" . $info["items"][0]["snippet"][
 	}
 ?>
 
-<div class="youtube__priview">
-	<div class="youtube__priview-logo preview__link">
+<div class="youtube__preview">
+	<div class="youtube__preview-logo preview__link">
 		<a href="https://www.youtube.com">
 			YouTube
 		</a>
 	</div>
-	<div class="youtube__priview-chanel preview__link">
+	<div class="youtube__preview-chanel preview__link">
 		<a href="<?php echo $channelUrl ?>">
 			<?php echo $channelTitle; ?>
 		</a>
 	</div>
-	<div class="youtube__priview-title preview__link">
+	<div class="youtube__preview-title preview__link">
 		<a href="<?php echo $url ?>">
 			<?php echo $title; ?>
 		</a>
 	</div>
-	<div class="youtube__priview-content">
-		<div class="youtube__priview-content_bg">
+	<div class="youtube__preview-content">
+		<div class="youtube__preview-content_bg">
 			<img src="
 			<?php echo $image
 			?>
-			" alt="" class="youtube__priview-img">
+			" alt="" class="youtube__preview-img">
 			<img class="sta__button" src="youtube.png" height ="70px" alt="">
 		</div>
-		<iframe id="preview" source="https://www.youtube.com/embed/rTEbIruSZwM?autoplay=1" frameborder="0"  allowfullscreen class="player"></iframe>
+		<iframe id="preview" source="<?php echo $iframeUrl ?>" frameborder="0"  allowfullscreen class="player"></iframe>
 	</div>
 	
 </div> 
 
 <script>
-	var button = document.querySelector(".youtube__priview-content_bg");
+	var button = document.querySelector(".youtube__preview-content_bg");
 	var iframe = document.querySelector("#preview");
 
 	// Скрытие превью и запуск плеера.
 	button.addEventListener("click", function() {
 		iframe.style.display = 'block';
-		iframe.setAttribute('src', 'https://www.youtube.com/embed/rTEbIruSZwM?autoplay=1');
+		var src = iframe.getAttribute('source');
+		iframe.setAttribute('src', src);
 		button.style.display = 'none';
 	});
 </script>
@@ -93,7 +94,7 @@ a
 {
 	cursor: pointer;
 }
-.youtube__priview
+.youtube__preview
 {
 	background: #303136;
 	width: 320px;
@@ -105,17 +106,17 @@ a
 	margin: auto;
 	margin-top: 200px;
 }
-.youtube__priview-logo a
+.youtube__preview-logo a
 {
 	font-size: 15px;
 	color: gray;
 }
-.youtube__priview-chanel a
+.youtube__preview-chanel a
 {
 	font-size: 16px;
 	color: #fff;
 }
-.youtube__priview-title
+.youtube__preview-title
 {
 	font-size: 19px;
 	height: 24px;
@@ -124,17 +125,17 @@ a
 	font-weight: bold;
 	margin-bottom: 10px;
 }
-.youtube__priview-title a
+.youtube__preview-title a
 {
 	color: #4196DF;
 }
-.youtube__priview-content
+.youtube__preview-content
 {
 	position: relative;
 	min-height: 185px;
 	cursor: pointer;
 }
-.youtube__priview-img
+.youtube__preview-img
 {
 	position: absolute;
 }
@@ -153,7 +154,7 @@ a
 {
 	display: none;
 }
-.youtube__priview-content:hover .sta__button
+.youtube__preview-content:hover .sta__button
 {
 	opacity: 1;
 }
